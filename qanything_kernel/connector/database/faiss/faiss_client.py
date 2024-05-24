@@ -57,7 +57,8 @@ class FaissClient:
                 faiss_client: FAISS = load_vector_store(faiss_index_path, self.embeddings)
             else:
                 faiss = dependable_faiss_import()
-                index = faiss.IndexFlatL2(768)
+                # index = faiss.IndexFlatL2(768)
+                index = faiss.IndexFlatL2(1024)
                 docstore = SelfInMemoryDocstore()
                 debug_logger.info(f'init FAISS kb_id: {kb_id}')
                 faiss_client: FAISS = FAISS(self.embeddings, index, docstore, index_to_docstore_id={})

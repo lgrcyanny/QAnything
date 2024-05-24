@@ -60,11 +60,10 @@ PROMPT_TEMPLATE = """
 {question}
 ---
 回答要求
-1.引言：简要介绍问题的背景和重要性。
-2.问题分析：
+1.问题分析：
 原因分析：深入分析导致问题的潜在原因。
 影响：说明问题可能对儿童和家庭的影响。
-3.具体策略：请列举6~10个解决策略，简要介绍实施步骤
+2.具体策略：请列举6~10个解决策略，简要介绍实施步骤
 4.结论：总结关键点，并强调长期坚持的重要性。
 请确保每个部分的信息简洁明了，便于家长理解和实施。
 必须用中文回答，如果参考信息没有
@@ -79,13 +78,13 @@ QUERY_PROMPT_TEMPLATE = """{question}"""
 SENTENCE_SIZE = 100
 
 # 匹配后单段上下文长度
-CHUNK_SIZE = 800
+CHUNK_SIZE = 512
 
 # 传入LLM的历史记录长度
-LLM_HISTORY_LEN = 3
+LLM_HISTORY_LEN = 0
 
 # 知识库检索时返回的匹配内容条数
-VECTOR_SEARCH_TOP_K = 40
+VECTOR_SEARCH_TOP_K = 15
 
 # embedding检索的相似度阈值，归一化后的L2距离，设置越大，召回越多，设置越小，召回越少
 VECTOR_SEARCH_SCORE_THRESHOLD = 1.1
@@ -121,27 +120,33 @@ FAISS_CACHE_SIZE = 10
 # LOCAL_LLM_MODEL_NAME = llm_api_serve_model
 # LOCAL_LLM_MAX_LENGTH = 4096
 
-LOCAL_RERANK_PATH = os.path.join(root_path, 'qanything_kernel/connector/rerank', 'rerank_model_configs_v0.0.1')
+# LOCAL_RERANK_PATH = os.path.join(root_path, 'qanything_kernel/connector/rerank', 'rerank_model_configs_v0.0.1')
+LOCAL_RERANK_PATH = os.path.join(root_path, "assets", "custom_models", "infgrad", "stella-mrl-large-zh-v3.5-1792d")
 if os_system == 'Darwin':
     LOCAL_RERANK_REPO = "maidalun/bce-reranker-base_v1"
     LOCAL_RERANK_MODEL_PATH = os.path.join(LOCAL_RERANK_PATH, "pytorch_model.bin")
 else:
-    LOCAL_RERANK_REPO = "netease-youdao/bce-reranker-base_v1"
-    LOCAL_RERANK_MODEL_PATH = os.path.join(LOCAL_RERANK_PATH, "rerank.onnx")
+    # LOCAL_RERANK_REPO = "netease-youdao/bce-reranker-base_v1"
+    # LOCAL_RERANK_MODEL_PATH = os.path.join(LOCAL_RERANK_PATH, "rerank.onnx")
+    LOCAL_RERANK_REPO = LOCAL_RERANK_PATH
+    LOCAL_RERANK_MODEL_PATH = os.path.join(LOCAL_RERANK_PATH, "pytorch_model.bin")
 print('LOCAL_RERANK_REPO:', LOCAL_RERANK_REPO)
 LOCAL_RERANK_MODEL_NAME = 'rerank'
-LOCAL_RERANK_MAX_LENGTH = 512
+LOCAL_RERANK_MAX_LENGTH = 1024
 
-LOCAL_EMBED_PATH = os.path.join(root_path, 'qanything_kernel/connector/embedding', 'embedding_model_configs_v0.0.1')
+# LOCAL_EMBED_PATH = os.path.join(root_path, 'qanything_kernel/connector/embedding', 'embedding_model_configs_v0.0.1')
+LOCAL_EMBED_PATH = os.path.join(root_path, "assets", "custom_models", "infgrad", "stella-mrl-large-zh-v3.5-1792d")
 if os_system == 'Darwin':
     LOCAL_EMBED_REPO = "maidalun/bce-embedding-base_v1"
     LOCAL_EMBED_MODEL_PATH = os.path.join(LOCAL_EMBED_PATH, "pytorch_model.bin")
 else:
-    LOCAL_EMBED_REPO = "netease-youdao/bce-embedding-base_v1"
-    LOCAL_EMBED_MODEL_PATH = os.path.join(LOCAL_EMBED_PATH, "embed.onnx")
+    # LOCAL_EMBED_REPO = "netease-youdao/bce-embedding-base_v1"
+    # LOCAL_EMBED_MODEL_PATH = os.path.join(LOCAL_EMBED_PATH, "embed.onnx")
+    LOCAL_EMBED_REPO = LOCAL_EMBED_PATH
+    LOCAL_EMBED_MODEL_PATH = os.path.join(LOCAL_EMBED_PATH, "pytorch_model.bin")
 print('LOCAL_EMBED_REPO:', LOCAL_EMBED_REPO)
 LOCAL_EMBED_MODEL_NAME = 'embed'
-LOCAL_EMBED_MAX_LENGTH = 512
+LOCAL_EMBED_MAX_LENGTH = 1024
 
 # VLLM PARAMS
 model_path = os.path.join(root_path, "assets", "custom_models")
