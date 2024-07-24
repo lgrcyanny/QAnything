@@ -17,8 +17,8 @@ def stream_requests(data_raw):
 
 def test():
     data_raw = {
-      "kb_ids": [kb_id],
-      "question": "韦小宝身份证号？",
+      "kb_ids": ["chatbaby"],
+      "question": "三岁小朋友玩什么游戏？",
       "user_id": "zzp",
       "streaming": True,
       "history": []

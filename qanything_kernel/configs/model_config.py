@@ -52,21 +52,13 @@ STREAMING = True
 # 你的回复："""
 
 PROMPT_TEMPLATE = """
-你是一位育儿专家，专注于儿童心理学和早期教育。请根据<<参考信息>>，必须用中文，回答<<问题>>，参考信息可能不相关，回答一定要忠于原文，不能胡编乱造，确保信息专业、简洁，并有明确的结构和深入的分析：
+你是一位耐心专业的育儿专家，专注于幼儿养育，儿童心理学和早期教育。请根据<<参考信息>>，一步步的思考，回答<<问题>>，必须用中文，参考信息可能不相关，回答一定要忠于原文，不能胡编乱造，确保信息专业、简洁，结构化：
 <<参考信息>>
 {context}
 ---
 <<我的问题或指令>>
 {question}
 ---
-回答要求
-1.问题分析：
-原因分析：深入分析导致问题的潜在原因。
-影响：说明问题可能对儿童和家庭的影响。
-2.具体策略：请列举6~10个解决策略，简要介绍实施步骤
-4.结论：总结关键点，并强调长期坚持的重要性。
-请确保每个部分的信息简洁明了，便于家长理解和实施。
-必须用中文回答，如果参考信息没有
 你的回复："""
 
 # For LLM Chat w/o Retrieval context 
@@ -75,16 +67,16 @@ PROMPT_TEMPLATE = """
 QUERY_PROMPT_TEMPLATE = """{question}"""
 
 # 文本分句长度
-SENTENCE_SIZE = 100
+SENTENCE_SIZE = 200
 
 # 匹配后单段上下文长度
-CHUNK_SIZE = 512
+CHUNK_SIZE = 256
 
 # 传入LLM的历史记录长度
 LLM_HISTORY_LEN = 0
 
 # 知识库检索时返回的匹配内容条数
-VECTOR_SEARCH_TOP_K = 15
+VECTOR_SEARCH_TOP_K = 8
 
 # embedding检索的相似度阈值，归一化后的L2距离，设置越大，召回越多，设置越小，召回越少
 VECTOR_SEARCH_SCORE_THRESHOLD = 1.1
@@ -95,7 +87,7 @@ VECTOR_SEARCH_SCORE_THRESHOLD = 1.1
 # 是否开启中文标题加强，以及标题增强的相关配置
 # 通过增加标题判断，判断哪些文本为标题，并在metadata中进行标记；
 # 然后将文本与往上一级的标题进行拼合，实现文本信息的增强。
-ZH_TITLE_ENHANCE = False
+ZH_TITLE_ENHANCE = True
 
 # MILVUS向量数据库地址
 MILVUS_HOST_LOCAL = '0.0.0.0'
@@ -121,7 +113,8 @@ FAISS_CACHE_SIZE = 10
 # LOCAL_LLM_MAX_LENGTH = 4096
 
 # LOCAL_RERANK_PATH = os.path.join(root_path, 'qanything_kernel/connector/rerank', 'rerank_model_configs_v0.0.1')
-LOCAL_RERANK_PATH = os.path.join(root_path, "assets", "custom_models", "infgrad", "stella-mrl-large-zh-v3.5-1792d")
+# LOCAL_RERANK_PATH = os.path.join(root_path, "assets", "custom_models", "infgrad", "stella-mrl-large-zh-v3.5-1792d")
+LOCAL_RERANK_PATH = os.path.join(root_path, "assets", "custom_models", "iampanda", "zpoint_large_embedding_zh")
 if os_system == 'Darwin':
     LOCAL_RERANK_REPO = "maidalun/bce-reranker-base_v1"
     LOCAL_RERANK_MODEL_PATH = os.path.join(LOCAL_RERANK_PATH, "pytorch_model.bin")
@@ -135,7 +128,8 @@ LOCAL_RERANK_MODEL_NAME = 'rerank'
 LOCAL_RERANK_MAX_LENGTH = 1024
 
 # LOCAL_EMBED_PATH = os.path.join(root_path, 'qanything_kernel/connector/embedding', 'embedding_model_configs_v0.0.1')
-LOCAL_EMBED_PATH = os.path.join(root_path, "assets", "custom_models", "infgrad", "stella-mrl-large-zh-v3.5-1792d")
+# LOCAL_EMBED_PATH = os.path.join(root_path, "assets", "custom_models", "infgrad", "stella-mrl-large-zh-v3.5-1792d")
+LOCAL_EMBED_PATH = os.path.join(root_path, "assets", "custom_models", "iampanda", "zpoint_large_embedding_zh")
 if os_system == 'Darwin':
     LOCAL_EMBED_REPO = "maidalun/bce-embedding-base_v1"
     LOCAL_EMBED_MODEL_PATH = os.path.join(LOCAL_EMBED_PATH, "pytorch_model.bin")

@@ -97,7 +97,7 @@ class RerankBackend(ABC):
                 batch = self._tokenizer.pad(
                     tot_batches[k:k + self.batch_size],
                     padding=True,
-                    max_length=None,
+                    max_length=512,
                     pad_to_multiple_of=None,
                     return_tensors=self.return_tensors
                 )

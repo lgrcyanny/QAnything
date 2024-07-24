@@ -65,8 +65,8 @@ class LocalDocQA:
             from qanything_kernel.connector.rerank.rerank_torch_backend import RerankTorchBackend
             # self.local_rerank_backend: RerankOnnxBackend = RerankOnnxBackend(self.use_cpu)
             # self.embeddings: EmbeddingOnnxBackend = EmbeddingOnnxBackend(self.use_cpu)
-            self.local_rerank_backend: RerankTorchBackend = RerankTorchBackend(self.use_cpu)
-            self.embeddings: EmbeddingTorchBackend = EmbeddingTorchBackend(self.use_cpu)
+            self.local_rerank_backend: RerankTorchBackend = RerankTorchBackend(use_cpu=False)
+            self.embeddings: EmbeddingTorchBackend = EmbeddingTorchBackend(use_cpu=False)
         else:
             if args.use_openai_api:
                 self.llm: OpenAILLM = OpenAILLM(args)
