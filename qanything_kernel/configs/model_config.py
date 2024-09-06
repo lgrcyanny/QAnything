@@ -114,7 +114,7 @@ FAISS_CACHE_SIZE = 10
 
 # LOCAL_RERANK_PATH = os.path.join(root_path, 'qanything_kernel/connector/rerank', 'rerank_model_configs_v0.0.1')
 # LOCAL_RERANK_PATH = os.path.join(root_path, "assets", "custom_models", "infgrad", "stella-mrl-large-zh-v3.5-1792d")
-LOCAL_RERANK_PATH = os.path.join(root_path, "assets", "custom_models", "iampanda", "zpoint_large_embedding_zh")
+LOCAL_RERANK_PATH = os.path.join(root_path, "assets", "custom_models", "thenlper", "gte-base-zh")
 if os_system == 'Darwin':
     LOCAL_RERANK_REPO = "maidalun/bce-reranker-base_v1"
     LOCAL_RERANK_MODEL_PATH = os.path.join(LOCAL_RERANK_PATH, "pytorch_model.bin")
@@ -125,11 +125,11 @@ else:
     LOCAL_RERANK_MODEL_PATH = os.path.join(LOCAL_RERANK_PATH, "pytorch_model.bin")
 print('LOCAL_RERANK_REPO:', LOCAL_RERANK_REPO)
 LOCAL_RERANK_MODEL_NAME = 'rerank'
-LOCAL_RERANK_MAX_LENGTH = 1024
+LOCAL_RERANK_MAX_LENGTH = 768
 
 # LOCAL_EMBED_PATH = os.path.join(root_path, 'qanything_kernel/connector/embedding', 'embedding_model_configs_v0.0.1')
 # LOCAL_EMBED_PATH = os.path.join(root_path, "assets", "custom_models", "infgrad", "stella-mrl-large-zh-v3.5-1792d")
-LOCAL_EMBED_PATH = os.path.join(root_path, "assets", "custom_models", "iampanda", "zpoint_large_embedding_zh")
+LOCAL_EMBED_PATH = os.path.join(root_path, "assets", "custom_models", "thenlper", "gte-base-zh")
 if os_system == 'Darwin':
     LOCAL_EMBED_REPO = "maidalun/bce-embedding-base_v1"
     LOCAL_EMBED_MODEL_PATH = os.path.join(LOCAL_EMBED_PATH, "pytorch_model.bin")
@@ -140,7 +140,7 @@ else:
     LOCAL_EMBED_MODEL_PATH = os.path.join(LOCAL_EMBED_PATH, "pytorch_model.bin")
 print('LOCAL_EMBED_REPO:', LOCAL_EMBED_REPO)
 LOCAL_EMBED_MODEL_NAME = 'embed'
-LOCAL_EMBED_MAX_LENGTH = 1024
+LOCAL_EMBED_MAX_LENGTH = 768
 
 # VLLM PARAMS
 model_path = os.path.join(root_path, "assets", "custom_models")
