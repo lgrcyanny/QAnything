@@ -78,7 +78,7 @@ class LocalDocQA:
             self.local_rerank_backend: RerankTorchBackend = RerankTorchBackend(self.use_cpu)
             self.embeddings: EmbeddingTorchBackend = EmbeddingTorchBackend(self.use_cpu)
         self.mysql_client = KnowledgeBaseManager()
-        self.ocr_reader = OCRQAnything(model_dir=OCR_MODEL_PATH, device="cpu")  # 省显存
+        self.ocr_reader = OCRQAnything(model_dir=OCR_MODEL_PATH, device="cuda")  # 省显存
         debug_logger.info(f"OCR DEVICE: {self.ocr_reader.device}")
         self.faiss_client = FaissClient(self.mysql_client, self.embeddings)
 

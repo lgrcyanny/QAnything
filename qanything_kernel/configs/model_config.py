@@ -51,15 +51,35 @@ STREAMING = True
 # 请根据上述参考信息回答我的问题或回复我的指令。前面的参考信息可能有用，也可能没用，你需要从我给出的参考信息中选出与我的问题最相关的那些，来为你的回答提供依据。回答一定要忠于原文，简洁但不丢信息，不要胡乱编造。我的问题或指令是什么语种，你就用什么语种回复,
 # 你的回复："""
 
+# PROMPT_TEMPLATE = """
+# 你是一位耐心专业的百科知识专家，熟悉幼儿养育，儿童心理学，科学，哲学等方面。请根据<<参考信息>>，一步步的思考，回答<<问题>>，必须用中文，参考信息可能不相关，回答一定要忠于原文，不能胡编乱造，确保信息专业、简洁，结构化：
+# <<参考信息>>
+# {context}
+# ---
+# <<我的问题或指令>>
+# {question}
+# ---
+# 你的回复："""
+
 PROMPT_TEMPLATE = """
-你是一位耐心专业的百科知识专家，熟悉幼儿养育，儿童心理学，科学，哲学等方面。请根据<<参考信息>>，一步步的思考，回答<<问题>>，必须用中文，参考信息可能不相关，回答一定要忠于原文，不能胡编乱造，确保信息专业、简洁，结构化：
+角色：你是一位耐心专业的百科知识专家，熟悉幼儿养育，儿童心理学，发展心理学，科学，哲学等方面的知识
+要求:
+    1.根据<<参考信息>>，一步步思考用户提出<<问题>>的原因和影响，根据分析给出合适的育儿方案和策略
+    2.前面的参考信息可能有用，也可能没用，你需要从给出的<<参考信息>>中选出与问题最相关的那些，来为你的回答提供依据
+    3.当<<参考信息>>不足够提供依据时，可以根据自己已有的知识给出答案
+    4.回答一定要用中文 确保回答专业、简洁，结构化，分点列出答案
+    5.回答的最后，再分点推荐3个相关的问题
+限制:
+    5.不回答与育儿不相关的问题
 <<参考信息>>
 {context}
----
-<<我的问题或指令>>
+----
+<<问题>>
 {question}
 ---
-你的回复："""
+你的回复：
+ 
+"""
 
 # For LLM Chat w/o Retrieval context 
 # PROMPT_TEMPLATE = """{question}"""
@@ -114,7 +134,7 @@ FAISS_CACHE_SIZE = 10
 
 # LOCAL_RERANK_PATH = os.path.join(root_path, 'qanything_kernel/connector/rerank', 'rerank_model_configs_v0.0.1')
 # LOCAL_RERANK_PATH = os.path.join(root_path, "assets", "custom_models", "infgrad", "stella-mrl-large-zh-v3.5-1792d")
-LOCAL_RERANK_PATH = os.path.join(root_path, "assets", "custom_models", "thenlper", "gte-base-zh")
+LOCAL_RERANK_PATH = os.path.join(root_path, "assets", "custom_models", "embedding", "embedding-model")
 if os_system == 'Darwin':
     LOCAL_RERANK_REPO = "maidalun/bce-reranker-base_v1"
     LOCAL_RERANK_MODEL_PATH = os.path.join(LOCAL_RERANK_PATH, "pytorch_model.bin")
@@ -129,7 +149,7 @@ LOCAL_RERANK_MAX_LENGTH = 768
 
 # LOCAL_EMBED_PATH = os.path.join(root_path, 'qanything_kernel/connector/embedding', 'embedding_model_configs_v0.0.1')
 # LOCAL_EMBED_PATH = os.path.join(root_path, "assets", "custom_models", "infgrad", "stella-mrl-large-zh-v3.5-1792d")
-LOCAL_EMBED_PATH = os.path.join(root_path, "assets", "custom_models", "thenlper", "gte-base-zh")
+LOCAL_EMBED_PATH = os.path.join(root_path, "assets", "custom_models", "embedding", "embedding-model")
 if os_system == 'Darwin':
     LOCAL_EMBED_REPO = "maidalun/bce-embedding-base_v1"
     LOCAL_EMBED_MODEL_PATH = os.path.join(LOCAL_EMBED_PATH, "pytorch_model.bin")
